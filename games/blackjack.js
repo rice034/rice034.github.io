@@ -1,5 +1,5 @@
+import { getContentHeight, minContentHeight } from "/template.js";
 import * as utils from "/utils.js";
-import { minContentHeight } from "/template.js";
 
 var bet_btn; var stand_btn; var hit_btn; var split_btn; var doubleDown_btn;
 var bank_lbl; var maindiv; var handdivs = [];
@@ -8,8 +8,8 @@ var cardWidth; var cardHeight;
 window.page_init = function(){
     document.querySelectorAll('div.cardProb').forEach(function(div){
         var htmlString = "<img src=\""+div.dataset.img+"\"</img>"
-        + "<div><b>"+div.dataset.txt+"</b><br> Weight: "
-        + "<input type=\"number\" id=\"prob_" + div.id + "\" min=\"0\" step=\"1\" value=\"0\" />" 
+        + "<div><b>"+div.dataset.txt+"</b><br> <span style=\"white-space: nowrap;\">Wt.: "
+        + "<input type=\"number\" id=\"prob_" + div.id + "\" min=\"0\" step=\"1\" value=\"0\" /> </span>" 
         + "<p id=\"pct_" + div.id+ "\">Prob.:</p></div>";
         div.insertAdjacentHTML("beforeend", htmlString);
         
@@ -26,10 +26,11 @@ window.page_init = function(){
     bank_lbl = document.getElementById("bank");
     maindiv = document.getElementById("maindiv");
     cardHeight = utils.emToPx(maindiv, 5); cardWidth = utils.emToPx(maindiv, 3.5);
-    left.style.minHeight = "calc(" + minContentHeight +" - 7.5em)";
-    right.style.minHeight = "calc(" + minContentHeight +" - 7.5em)";
     var observer = new ResizeObserver(function(){
-        right.style.height = left.offsetHeight + "px";
+        console.log(document.getElementById("pageContent").scrollHeight);
+        right.style.minHeight = "1px";
+        right.style.minHeight = "calc("+document.getElementById("pageContent").scrollHeight+"px - 8em)";
+        right.style.height = Math.max(left.offsetHeight) + "px";
     });
     observer.observe(left);
     endGame();

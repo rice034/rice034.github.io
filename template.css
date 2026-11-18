@@ -2,7 +2,7 @@
     --weather-font: "Arial", sans-serif;
     --header-font: "Cambria", serif;
     --text-font: "Times New Roman", serif;
-    --min-width: 36em;
+    --min-width: 48em;
     /* leave bg colour 2 and accent colour 1 as a name */
     --colour-white: white;
     --colour-lightgrey: silver;
@@ -84,6 +84,7 @@ html{
     -moz-osx-font-smoothing: auto;  
     font-smooth: never;
     overflow-y: scroll;
+    min-height:100vh;
 }
 
 a{
@@ -110,12 +111,14 @@ button:disabled{
 
 body{
     min-width:var(--min-width);
+    min-height:100vh;
+    display: flex; flex-direction: column;
     margin: 0px;
     padding: 0px;
     font-family: var(--text-font), serif;
     color: var(--colour-black);
     background-color: var(--colour-lightgrey);
-    align-items: center;
+    align-items: stretch;
 }
 h1, h2, h3, h4{
     font-family: var(--header-font), sans-serif;
@@ -156,6 +159,13 @@ h1, h2, h3, h4{
     height: 5em;
     background: linear-gradient(to left, var(--bg-colour1-tint) 0%, var(--bg-colour1) 75%);
     border-bottom: 1px solid var(--colour-white);
+}
+#sharedLayout {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 100vh;
+    width: 100%;
 }
 .weatherbox{
     margin: 0px;
@@ -237,14 +247,12 @@ a.itembox img{
 
 #pageContent{
     background: linear-gradient(to bottom, var(--bg-colour-lighter), var(--colour-white));
-    background-size: 100% 100vh;
     background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 .pageLayout{
     min-width: fit-content;
-    flex: 1;
+    flex: 1 0 auto;
     margin: 0em;
     padding: 0 0em;
     align-items: stretch;
@@ -294,7 +302,7 @@ a.itembox img{
     max-width: 60vw;
     padding: 1em;
     padding-top: 0em;
-    flex: 1;
+    flex: 1 0 auto;
     background-color: var(--colour-white);
 }
 
@@ -308,4 +316,5 @@ a.itembox img{
     justify-content: center;
     align-items: center;
     text-align: center;
+    flex:none;
 }

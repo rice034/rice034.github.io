@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="/favicon.ico">
+    <meta charset="UTF-8">
+    <title>Maurice's BS</title>
+    <link rel="stylesheet" href="/template.css">
+    <script type="module" src="/utils.js"></script>
+</head>
+<body>
+<div id="sharedLayout"> </div>
+<template id="pageTemplate">
+    <div id="wrapperDiv" style="display: flex; flex-direction:column; border: 1px solid green; margin:1em; width:90%; height:100%;">
+        <div style="display:flex; align-items:center; height:10%;" id="titleDiv"> 
+            <div style="flex:1; height:3em; border-top:5px ridge saddlebrown;"></div> 
+            <img src="./burger-banner.gif" style="max-width:100%; height:auto;">
+            <div style="flex:1; height:3em; border-top:5px ridge saddlebrown;"></div> 
+        </div>
+        <canvas id="mainCanvas" style="flex:1;"></canvas>
+        
+        <div id="bottomDiv" style="display: flex; height:30%; margin-bottom:4px;">
+        <div class="bottomBins" style="width:30%; border-left: 3px solid saddlebrown;">
+            <span align="center" style="width:100%; border-bottom:1px solid saddlebrown"><b>Pantry</b></span>
+            <ul id="pantry" style="overflow-y:scroll; flex:1; scrollbar-color: DarkGoldenrod beige; scrollbar-width: thin;">
+            <li><img src="/imgs/goto.png">Subtitle</li>
+            <li>Option 1</li>
+            <li>Option 2</li>
+            <li>Option 2</li>
+            <li>Option 2</li>
+            <li>Option 2</li>
+            <li>Option 2</li>
+        </ul>
+        </div>
+        <div class="bottomBins">
+            <span align="center"><b>Clear<br>counter</b></span>
+            <img id="rubbishBin" onclick="clearCounter();" style="flex:1; max-width:100%;">
+        </div> 
+        </div>
+    </div>
+</template>
+<style>
+    .bottomBins{
+        border: 3px solid saddlebrown;
+        border-left: none; 
+        background: DarkGoldenrod;
+        height:100%; max-height:100%; 
+        display: flex; 
+        flex-direction:column;
+    }
+    .bottomBins span{
+        margin-left: .25em;
+        margin-right: .25em;
+    }
+    #rubbishBin{
+        background-image: url("./bin_closed.png");
+        background-size:contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    #rubbishBin:hover{
+        background-image: url("./bin_open.png");
+        background-size:contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+    }
+    .pageContent{
+        padding:0em;
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+    }
+    ul{
+        margin: 0px;
+        padding: 0px;
+    }
+    li{
+        cursor: pointer;
+        background: BurlyWood;
+        border: 1px solid black;
+        margin: .125em;
+        padding-left: .125em;
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+    }
+    li img{
+        padding: .125em;
+        padding-left: 0px;
+        height: 1.5em;
+    }
+
+</style>
+<script type="module" src = "/template.js"> </script>
+<script type="module" src = "./burger.js"> </script>
+</body>
+</html>

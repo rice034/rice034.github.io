@@ -25,7 +25,8 @@ function loadLayout() {
     });
 }
 
-export var minContentHeight = "";
+var headerHeight = 0;
+var footerHeight = 0;
 
 function template_init(){
     window.setTheme = setTheme;
@@ -34,11 +35,20 @@ function template_init(){
     // spacing and stuff
     // var dpr = window.devicePixelRatio;
     // document.documentElement.style.zoom = (1/dpr).toString();
-    var headerHeight = document.getElementById("template_header").getBoundingClientRect().height;
-    var footerHeight = document.getElementById("template_footer").getBoundingClientRect().height;
+    var observer1 = new ResizeObserver(function(){
+        document.getElementById("headerBuffer").style.height = document.getElementById("template_header").getBoundingClientRect().height+"px";
+        headerHeight = document.getElementById("template_header").getBoundingClientRect().height;
+        footerHeight = document.getElementById("template_footer").getBoundingClientRect().height;
+        
+        if(typeof window.page_resize === "function"){
+            window.page_resize();
+        }
+    })
+    observer1.observe(document.getElementById("template_header"));
+    headerHeight = document.getElementById("template_header").getBoundingClientRect().height;
+    footerHeight = document.getElementById("template_footer").getBoundingClientRect().height;
+
     document.getElementById("headerBuffer").style.height = headerHeight+"px";
-    document.getElementById("template_pageLayout").style.minHeight = "calc(100vh - " + (headerHeight+footerHeight) + "px)";
-    minContentHeight = "calc(100vh - " + (headerHeight+footerHeight) + "px)";
     reset_tiling();
     // weather
     var template = document.getElementById("pageTemplate");
@@ -85,6 +95,16 @@ function template_init(){
     addPoster(document.getElementById("template_sidebar_left"), "/imgs/posters/poster" + utils.randInt(1,POSTERS_COUNT) + ".gif", "90%");
     tick();
     setInterval(tick, 1000); //updates per 1000ms i.e. 1s
+}
+
+export function getContentHeight(){
+    return Math.max(document.getElementById("template_sidebar_right").scrollHeight,
+    document.getElementById("template_sidebar_right").scrollHeight,
+    window.innerHeight - headerHeight - footerHeight
+    );
+}
+export function minContentHeight(){
+    return window.innerHeight - headerHeight - footerHeight;
 }
 
 function reset_tiling(){

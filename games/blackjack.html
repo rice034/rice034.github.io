@@ -12,7 +12,7 @@
 <template id="pageTemplate">
     <h1> <u>Blackjack+</u></h1> <div style="height:.25em;"></div> Now with a copious amount of customisation! <a href="./blackjack-help.html">Need help?</a><br><br>
     
-    <div style="display:flex; align-items:stretch; position:relative; padding: 0px; margin: 0px; border-top: 1px solid var(--colour-darkgrey); ">
+    <div id="outerDiv" style="display:flex; padding: 0px; margin: 0px; border-top: 1px solid var(--colour-darkgrey); ">
     <div id="leftpanel" style="width:70%; height:fit-content;">
     <br>
     <div style="display:flex;">
@@ -73,6 +73,7 @@
         <input type="number" id="bust" name="bust" style="width:70%;" value="21"/> <br>
         <div style="width: 100%; margin:.5em 0px; border-bottom:1px solid var(--colour-lightgrey)"></div>
         Card probabilities:
+        <div style="padding:0; gap:0; margin:0;">
         <div class="cardProb" id="ace" data-img="/imgs/cards/as.png" data-txt="Ace (1 or 11)"></div>
         <div class="cardProb" id="two" data-img="/imgs/cards/2s.png" data-txt="Deuce"></div>
         <div class="cardProb" id="three" data-img="/imgs/cards/3s.png" data-txt="Three"></div>
@@ -86,6 +87,7 @@
         <div class="cardProb" id="jack" data-img="/imgs/cards/js.png" data-txt="Jack (=10)"></div>
         <div class="cardProb" id="queen" data-img="/imgs/cards/qs.png" data-txt="Queen (=10)"></div>
         <div class="cardProb" id="king" data-img="/imgs/cards/ks.png" data-txt="King (=10)"></div>
+        </div>
     </div>
     </div>
     
@@ -95,8 +97,10 @@
         display: flex;
         align-items: center;
         height:4em; 
-        margin: .25em 0px;
-        gap: .25em .25em;
+        min-height:4em;
+        margin: 0px;
+        gap: 0 .25em;
+        padding: 0;
     }
     .cardProb div, .cardProb span, .cardProb p{
         margin: 0px;
