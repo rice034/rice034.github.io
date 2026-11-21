@@ -10,19 +10,29 @@
 <body>
 <div id="sharedLayout"> </div>
 <template id="pageTemplate">
-    <div id="wrapperDiv" style="display: flex; flex-direction:column; border: 1px solid green; margin:1em; width:90%; height:100%;">
+    <h3> THIS IS UNPLAYABLE YET IT IS STILL A WORK IN PROGRESS</h3>
+    <h2 id="loadingLbl">Game Loading...</h2>
+    <div id="wrapperDiv" style="display:none;">
         <div style="display:flex; align-items:center; height:10%;" id="titleDiv"> 
             <div style="flex:1; height:3em; border-top:5px ridge saddlebrown;"></div> 
-            <img src="./burger-banner.gif" style="max-width:100%; height:auto;">
+            <img src="./burger-banner.gif" style="max-width:100%; height:auto; z-index: 9000;">
             <div style="flex:1; height:3em; border-top:5px ridge saddlebrown;"></div> 
         </div>
-        <canvas id="mainCanvas" style="flex:1;"></canvas>
         
-        <div id="bottomDiv" style="display: flex; height:30%; margin-bottom:4px;">
+        <div id="centerDiv" style="flex:1; display:flex;">
+            <div style="display:flex; flex-direction:column; min-width:110px; width:20%; height:100%; margin:0; padding:0;">
+                <span id="info" style="word-wrap:break-word; background:url('/imgs/gallery/page.gif'); background-size:100% 100%; flex:1; width:100%; margin:0; margin-top:20px; padding:15px;">
+                </span>
+                <canvas id="info_bottom" width=100; height=30; style="margin:0; padding:0; width:100%; height:30px;"></canvas>
+            </div>
+            <canvas id="mainCanvas" style="flex:1; height:100%;"></canvas>
+        </div>
+
+        <div id="bottomDiv" style="display: flex; height:9em; max-height:30%; margin-bottom:4px;">
         <div class="bottomBins" style="width:30%; border-left: 3px solid saddlebrown;">
             <span align="center" style="width:100%; border-bottom:1px solid saddlebrown"><b>Pantry</b></span>
             <ul id="pantry" style="overflow-y:scroll; flex:1; scrollbar-color: DarkGoldenrod beige; scrollbar-width: thin;">
-            <li><img src="/imgs/goto.png">Subtitle</li>
+            <li><img src="/imgs/goto.png">Subheader</li>
             <li>Option 1</li>
             <li>Option 2</li>
             <li>Option 2</li>
@@ -35,10 +45,26 @@
             <span align="center"><b>Clear<br>counter</b></span>
             <img id="rubbishBin" onclick="clearCounter();" style="flex:1; max-width:100%;">
         </div> 
+        <div class="bottomBins">
+            <button></button>
+        </div>
         </div>
     </div>
 </template>
 <style>
+    #wrapperDiv{
+        display: flex;
+        flex-direction:column; 
+        border: 3px double brown; 
+        margin:1em; width:90%; 
+        min-width: 300px;
+        min-height:300px;
+        max-width: 800px;
+        max-height:600px;
+        height:600px;
+        box-sizing: border-box;
+        overflow:hidden;
+    }
     .bottomBins{
         border: 3px solid saddlebrown;
         border-left: none; 
@@ -51,6 +77,12 @@
         margin-left: .25em;
         margin-right: .25em;
     }
+    .bottomBins button{
+        background-color: inherit;
+        border: 1px outset saddlebrown;
+    }
+    .bottomBins button:active{border: 1px inset saddlebrown;}
+    .bottomBins button:disabled{background-color: rgb(167, 151, 109);}
     #rubbishBin{
         background-image: url("./bin_closed.png");
         background-size:contain;

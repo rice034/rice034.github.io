@@ -224,13 +224,36 @@ export function drawDot(g, point_origin, diameter, L=2){ // L1 Manhattan, L2 Euc
 }
 export function drawImg(dest, src, point, width=null, height=null){
     dest.imageSmoothingEnabled = false;
-    if(width==null||height==null){
+    if(width==null&&height==null){
         dest.drawImage(src, point.x, point.y);
+    }else if(width==null){
+        dest.drawImage(src, point.x, point.y, src.width/src.height*height,height);
+    }else if(height==null){
+        dest.drawImage(src, point.x, point.y, width, src.height/src.width*width);
     }else{
         dest.drawImage(src, point.x, point.y, width, height);
     }
 }
 
+export var imgCache = new Map();
+export function loadImg(str){
+    if(imgCache.has(str.toLowerCase())){return;}
+    var img = new Image();
+    img.onload = function(){
+        const canvas = document.createElement("canvas");
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;;
+        canvas.getContext("2d").drawImage(img, 0, 0);
+        imgCache.set(str.toLowerCase(), canvas);
+    };
+    img.src=str;
+}
+export function getImg(str) {
+    return imgCache.get(str.toLowerCase());
+}
+export function imgsLoaded(){
+    return imgCache.size;
+}
 export function getCroppedImg(src, point1, point2){
     var crop = document.createElement("canvas");
     var w = Math.abs(point1.x-point2.x);

@@ -36,6 +36,11 @@ window.page_init = function(){
     endGame();
     document.getElementById("status").textContent = "Set your bet amounts and press [PLACE BET] to start!";
     setInterval(tick, 100);
+    console.log(document.getElementById("pageContent").scrollHeight);
+    right.style.minHeight = "1px";
+    right.style.minHeight = "calc("+document.getElementById("pageContent").scrollHeight+"px - 8em)";
+    right.style.height = Math.max(left.offsetHeight) + "px";
+
 }
 
 function inputChange(){
