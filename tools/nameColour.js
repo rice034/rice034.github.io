@@ -2,6 +2,8 @@ import * as utils from "/utils.js";
 var g;
 var colour = {r:64, g:128, b:128, a:1};
 var ptrX = 128; var ptrY = 128;
+var okLabColour = undefined;
+var drawColour = 'white';
 
 window.page_init = function(){
     var canvas = document.getElementById("canvas");
@@ -75,9 +77,11 @@ function input(using){
     ptrY = (1 - document.getElementById("v").value/100)*255;
     refreshSquare(document.getElementById("hue").value);
     colour = utils.getPixelColour(g, {x:ptrX, y:ptrY});
+    okLabColour = rgbToOklab(colour);
+    drawColour = Math.hypot(okLabColour.L-1,okLabColour.a,okLabColour.b)>Math.hypot(okLabColour.L,okLabColour.a,okLabColour.b)?'white':'black';
     utils.setDrawingColour(g, utils.rgbToStr(colour));
     utils.fillRect(g, ptrX-3, ptrY-3, 7, 7);
-    utils.setDrawingColour(g, ptrY>128?'white':'black');
+    utils.setDrawingColour(g, drawColour);
     utils.drawRect(g, ptrX-3, ptrY-3, 7, 7);
     updateName();
 }
@@ -86,9 +90,11 @@ function click(x, y){
     ptrX = x; ptrY = y;
     refreshSquare(document.getElementById("hue").value);
     colour = utils.getPixelColour(g, {x:ptrX, y:ptrY});
+    okLabColour = rgbToOklab(colour);
+    drawColour = Math.hypot(okLabColour.L-1,okLabColour.a,okLabColour.b)>Math.hypot(okLabColour.L,okLabColour.a,okLabColour.b)?'white':'black';
     utils.setDrawingColour(g, utils.rgbToStr(colour));
     utils.fillRect(g, x-3, y-3, 7, 7);
-    utils.setDrawingColour(g, y>128?'white':'black');
+    utils.setDrawingColour(g, drawColour);
     utils.drawRect(g, x-3, y-3, 7, 7);
     document.getElementById("h").value = document.getElementById("hue").value%360;
     document.getElementById("s").value = Math.round(100*ptrX/255) 
@@ -101,15 +107,31 @@ function click(x, y){
 
 function updateName(){
     document.getElementById("name").style.backgroundColor = utils.rgbToStr(colour);
-    document.getElementById("name").style.color = ptrY>128?'white':'black';
+    document.getElementById("name").style.color = drawColour;
     var idx = 0;
     var dist = 1000;
+    var inputColour = rgbToOklab(colour);
     for(var i=0; i<utils.htmlColours.length; i++){
-        var newColour = utils.htmlColoursRGB[i];
-        var newDist = Math.sqrt((newColour.r-colour.r)**2 + (newColour.g-colour.g)**2 + (newColour.b-colour.b)**2);
+        var newColour = rgbToOklab(utils.htmlColoursRGB[i]);
+        var newDist = Math.sqrt((newColour.L-inputColour.L)**2 + (newColour.a-inputColour.a)**2 + (newColour.b-inputColour.b)**2);
         if(dist>newDist){
             idx = i; dist = newDist; 
         }
     }
     document.getElementById("name").textContent = utils.htmlColours[idx];
+}
+
+function rgbToOklab(colour){
+    function tmp(x){
+        return x<=.04045?x/12.92:((x+.055)/1.055)**2.4;
+    }
+    var r = tmp(colour.r/255); var g = tmp(colour.g/255); var b = tmp(colour.b/255);
+    var l = Math.cbrt(0.4122214708*r+0.5363325363*g+0.0514459929*b);
+    var m = Math.cbrt(0.2119034982*r+0.6806995451*g+0.1073969566*b);
+    var s = Math.cbrt(0.0883024619*r+0.2817188376*g+0.6299787005*b);
+    return{
+        L:0.2104542553*l+0.7936177850*m-0.0040720468*s,
+        a:1.9779984951*l-2.4285922050*m+0.4505937099*s,
+        b:0.0259040371*l+0.7827717662*m-0.8086757660*s
+    };
 }
