@@ -4,6 +4,9 @@
     --text-font: "Times New Roman", serif;
     --min-width: 48em;
     /* leave bg colour 2 and accent colour 1 as a name */
+}
+
+:root[data-theme="original"]{
     --colour-white: white;
     --colour-lightgrey: silver;
     --colour-darkgrey: slategrey;
@@ -21,7 +24,7 @@
     --a-colour: blue;
     --a-clicked: purple;
 }
-:root[data-theme="original"]{ /* leave bg colour 2 and accent colour 1 as a name */
+:root[data-theme="green"]{ /* leave bg colour 2 and accent colour 1 as a name */
     --colour-white: white;
     --colour-lightgrey:silver;
     --colour-darkgrey: SlateGray;

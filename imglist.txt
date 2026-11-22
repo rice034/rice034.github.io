@@ -1,6 +1,10 @@
+/imgs/gallery/arrow_right.png
+/imgs/gallery/folder.png
 /imgs/gallery/mj.png
-/imgs/gallery/plate.png
 /imgs/gallery/rick.png
+/imgs/gallery/burgersim/bread.png
+/imgs/gallery/burgersim/brioche.png
+/imgs/gallery/burgersim/plate.png
 /imgs/badges/github.png
 /imgs/posters/poster1.gif
 /imgs/posters/poster2.gif

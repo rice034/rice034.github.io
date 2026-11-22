@@ -6,7 +6,7 @@ var root = getComputedStyle(document.documentElement);
 
 var g;
 var bi;
-var imgsToLoad = ["/imgs/gallery/plate.png"];
+var imgsToLoad = ["/imgs/gallery/burgersim/plate.png"];
 window.page_init = function(){
     document.querySelectorAll("#pantry li").forEach(function(item){
         item.addEventListener("click", function(){
@@ -56,7 +56,7 @@ function refresh(){
     utils.fillRect(g, 0, bi.height-30, bi.width, 30);
     utils.setDrawingColour(g, 'saddlebrown');
     utils.drawRect(g, 0, bi.height-30, bi.width, 30);
-    var plateImg = utils.getImg("/imgs/gallery/plate.png");
+    var plateImg = utils.getImg("/imgs/gallery/burgersim/plate.png");
     utils.drawImg(g, plateImg, {x:1,y:bi.height-bi.width*.06}, bi.width*.2, null);
 }
 

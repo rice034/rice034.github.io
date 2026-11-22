@@ -4,7 +4,7 @@ var root = getComputedStyle(document.documentElement);
 // consts
 var TILING_COUNT = 5;
 var POSTERS_COUNT = 2;
-var THEMES = ["default", "original", "autumn", "winter"];
+var THEMES = ["green", "original", "autumn", "winter"];
 
 if(document.addEventListener){
     document.addEventListener("DOMContentLoaded", loadLayout, false);
@@ -132,7 +132,7 @@ function reset_tiling(){
 }
 
 export function setNextTheme(){
-    if(isNaN(localStorage.getItem("preferred-theme"))){}
+    if(isNaN(localStorage.getItem("preferred-theme"))){localStorage.setItem("preferred-theme", -1);}
     if(Number(localStorage.getItem("preferred-theme"))==THEMES.length-1){setTheme(0);}
     else{
         setTheme(Number(localStorage.getItem("preferred-theme"))+1);
@@ -140,11 +140,7 @@ export function setNextTheme(){
 }
 
 export function setTheme(idx){
-    if(THEMES[idx] === "default") {
-        document.documentElement.removeAttribute("data-theme");
-    }else{
-        document.documentElement.dataset.theme = THEMES[idx];
-    }
+    document.documentElement.dataset.theme = THEMES[idx];
     localStorage.setItem("preferred-theme", idx);
     reset_tiling();
 }
