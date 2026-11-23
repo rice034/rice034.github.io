@@ -26,9 +26,13 @@ window.clickHandler = function(src, enabled){ // return: only works if enabled=f
             if(!enabled){return true;}
             window.open("https://github.com/rice034/", '_blank').focus();
             break;
-        case "/imgs/badges/blackjack.gif": 
+            case "/imgs/badges/blackjack.gif": 
             if(!enabled){return true;}
             window.location.href = "/games/blackjack.html";
+            break;
+        case "/imgs/badges/bs.gif": 
+            if(!enabled){return true;}
+            window.location.href = "/";
             break;
         case "/imgs/gallery/rick.png": 
             if(!enabled){return true;}

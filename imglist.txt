@@ -1,4 +1,5 @@
 /imgs/gallery/arrow_right.png
+/imgs/gallery/file.png
 /imgs/gallery/folder.png
 /imgs/gallery/mj.png
 /imgs/gallery/rick.png
@@ -12,6 +13,7 @@
 /imgs/gallery/page.gif
 /imgs/gallery/rubbish_bin.gif
 /imgs/badges/blackjack.gif
+/imgs/badges/bs.gif
 /imgs/weather/clear_day.gif
 /imgs/weather/clear_night.gif
 /imgs/weather/cloudy.gif
