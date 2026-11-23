@@ -20,15 +20,15 @@
         </div>
         
         <div id="centerDiv" style="flex:1; display:flex;">
-            <div style="display:flex; flex-direction:column; min-width:110px; width:20%; height:100%; margin:0; padding:0;">
+            <div style="display:flex; flex-direction:column; min-width:125px; width:20%; height:100%; margin:0; padding:0;">
                 <span id="info" style="word-wrap:break-word; background:url('/imgs/gallery/page.gif'); background-size:100% 100%; flex:1; width:100%; margin:0; margin-top:20px; padding:15px;">
                 </span>
-                <canvas id="info_bottom" width=100; height=30; style="margin:0; padding:0; width:100%; height:30px;"></canvas>
+                <div id="info_bottom" style="margin:0; padding:0; width:100%; height:30px; border:1px solid saddlebrown; background-color:#963"></div>
             </div>
-            <canvas id="mainCanvas" style="flex:1; height:100%;"></canvas>
+            <canvas id="mainCanvas" width="800" height="600" style="flex:1; width:80%; max-width:calc(100% - 125px); height:100%; "></canvas>
         </div>
 
-        <div id="bottomDiv" style="display: flex; height:9em; max-height:30%; margin-bottom:4px;">
+        <div id="bottomDiv" style="display: flex; height:9em; max-height:30%;">
         <div class="bottomBins" style="width:30%; border-left: 3px solid saddlebrown;">
             <span align="center" style="width:100%; border-bottom:1px solid saddlebrown"><b>Pantry</b></span>
             <ul id="pantry" style="overflow-y:scroll; flex:1; scrollbar-color: DarkGoldenrod beige; scrollbar-width: thin;">
@@ -43,7 +43,7 @@
         </div>
         <div class="bottomBins">
             <span align="center"><b>Clear<br>counter</b></span>
-            <img id="rubbishBin" onclick="clearCounter();" style="flex:1; max-width:100%;">
+            <img id="rubbishBin" onclick="clickHandler('bin');" style="flex:1; max-width:100%;">
         </div> 
         <div class="bottomBins" style="padding:3px;">
             
@@ -53,6 +53,9 @@
     </div>
 </template>
 <style>
+    div{
+        min-height:0; min-width:0;
+    }
     #wrapperDiv{
         display: flex;
         flex-direction:column; 
@@ -60,13 +63,12 @@
         margin:1em; width:90%; 
         min-width: 300px;
         min-height:300px;
-        max-width: 800px;
-        max-height:600px;
         height:600px;
         box-sizing: border-box;
-        overflow:hidden;
+        padding:0px;
     }
     .bottomBins{
+        box-sizing: border-box;
         border: 3px solid saddlebrown;
         border-left: none; 
         background: DarkGoldenrod;

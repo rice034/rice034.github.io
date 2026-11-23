@@ -18,25 +18,39 @@ window.page_init = function(){
     }
     bi = document.getElementById("mainCanvas");
     g = utils.imgGetGraphics(bi);
-    var tmpG = document.getElementById("info_bottom").getContext("2d");
-    utils.setDrawingColour(tmpG, '#963');
-    utils.fillRect(tmpG, 0, 0, 100, 30);
-    utils.setDrawingColour(tmpG, 'saddlebrown');
-    utils.drawRect(tmpG, 0, 0, 100, 30);
     setInterval(tick, 100);
-
+    document.querySelectorAll("li, button").forEach(function(btn){
+        btn.addEventListener("click", function(){clickHandler(btn.textContent);});
+    });
+    bi.addEventListener("mousedown", function(event){
+        var rect = bi.getBoundingClientRect();
+        var x = Math.floor((event.clientX-rect.left)*bi.width/rect.width);
+        var y = Math.floor((event.clientY-rect.top)*bi.height/rect.height);
+        x = Math.min(Math.max(0,x),Math.floor(bi.width)-1);
+        y = Math.min(Math.max(0,y),Math.floor(bi.height)-1);
+        canvasHandler("click", x, y);
+    });
+    g = utils.imgGetGraphics(bi);
 }
 
 window.page_resize = function(){
     var wrapperDiv = document.getElementById("wrapperDiv");
     wrapperDiv.style.height="1px";
     wrapperDiv.style.height="calc("+document.getElementById("pageContent").scrollHeight+"px - 4em)";
-    //wrapperDiv.style.maxHeight = "90vh";
-    mainCanvas.width = mainCanvas.parentElement.width;
-    mainCanvas.height = "auto";
-    mainCanvas.width = mainCanvas.getBoundingClientRect().width;
-    mainCanvas.height = mainCanvas.getBoundingClientRect().height;
+    mainCanvas.width = 800;
+    mainCanvas.height = 800*mainCanvas.getBoundingClientRect().height/mainCanvas.getBoundingClientRect().width;
+    document.getElementById("info_bottom").style.height = 30/mainCanvas.height*mainCanvas.getBoundingClientRect().height+"px";
+    bi = document.getElementById("mainCanvas");
+    g = utils.imgGetGraphics(bi);
     refresh();
+}
+
+window.clickHandler = function(str){
+    str=str.toLowerCase();
+    console.log("'"+str+"' clicked");
+}
+window.canvasHandler = function(type,x,y){
+    console.log("mouse "+type+" ("+x+","+y+")");
 }
 
 var loaded = false;
@@ -57,7 +71,7 @@ function refresh(){
     utils.setDrawingColour(g, 'saddlebrown');
     utils.drawRect(g, 0, bi.height-30, bi.width, 30);
     var plateImg = utils.getImg("/imgs/gallery/burgersim/plate.png");
-    utils.drawImg(g, plateImg, {x:1,y:bi.height-bi.width*.06}, bi.width*.2, null);
+    utils.drawImg(g, plateImg, {x:1,y:bi.height-50}, 150, null);
 }
 
 function tick(){
@@ -66,10 +80,6 @@ function tick(){
 
 function getFromPantry(str){
     str=str.trim().replaceAll(" ","");
-}
-
-window.clearCounter = function(){
-    
 }
 
 class Ingredient{

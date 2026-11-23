@@ -82,6 +82,7 @@
 
 
 html{
+    box-sizing: border-box;
     image-rendering: pixelated;
     -webkit-font-smoothing: none;
     -moz-osx-font-smoothing: auto;  
@@ -307,6 +308,7 @@ a.itembox img{
     padding-top: 0em;
     flex: 1 0 auto;
     background-color: var(--colour-white);
+    overflow-x:hidden;
 }
 
 .footer{
