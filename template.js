@@ -191,7 +191,7 @@ export function navToPath(path){
                     '\');"> <img src="/imgs/' + (isFile(value.name) ? (value.name.toUpperCase() == "INDEX.HTML" ? "homepage" : "goto"):"folder") +'.png" style="width:1em; height:1em;">' 
                     + (value.displayName===undefined ? value.name.toUpperCase() : value.displayName) +"</span>";
             }
-            htmlString = htmlString + '</div><span style="text-align:center; width:100%;" onclick="navToPath(\''
+            htmlString = htmlString + '</div><div style="height:.25em; width:100%;"></div><span style="text-align:center; width:100%;" onclick="navToPath(\''
                 + window.location.pathname.replace(/\/+$/, "").replace(/\/[^/]*$/, "")
                 +'\');">'+"(Back to current directory)"+"</span>";
 

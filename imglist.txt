@@ -3,6 +3,7 @@
 /imgs/gallery/folder.png
 /imgs/gallery/mj.png
 /imgs/gallery/rick.png
+/imgs/gallery/traffic_cone.png
 /imgs/gallery/burgersim/bread.png
 /imgs/gallery/burgersim/brioche.png
 /imgs/gallery/burgersim/plate.png

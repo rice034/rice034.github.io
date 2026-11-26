@@ -20,7 +20,10 @@ window.page_init = function(){
     g = utils.imgGetGraphics(bi);
     setInterval(tick, 100);
     document.querySelectorAll("li, button").forEach(function(btn){
-        btn.addEventListener("click", function(){clickHandler(btn.textContent);});
+        btn.addEventListener("click", function(){
+            if(btn.textContent){clickHandler(btn.textContent);}
+            else{clickHandler(btn.id);}
+        });
     });
     bi.addEventListener("mousedown", function(event){
         var rect = bi.getBoundingClientRect();
@@ -29,6 +32,14 @@ window.page_init = function(){
         x = Math.min(Math.max(0,x),Math.floor(bi.width)-1);
         y = Math.min(Math.max(0,y),Math.floor(bi.height)-1);
         canvasHandler("click", x, y);
+    });
+    bi.addEventListener("mouseup", function(event){
+        var rect = bi.getBoundingClientRect();
+        var x = Math.floor((event.clientX-rect.left)*bi.width/rect.width);
+        var y = Math.floor((event.clientY-rect.top)*bi.height/rect.height);
+        x = Math.min(Math.max(0,x),Math.floor(bi.width)-1);
+        y = Math.min(Math.max(0,y),Math.floor(bi.height)-1);
+        canvasHandler("release", x, y);
     });
     g = utils.imgGetGraphics(bi);
 }

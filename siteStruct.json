@@ -2,7 +2,8 @@
     "name": "/", "contents": [
         {"name": "blogs/", "contents": [
             {"name": "index.html", "displayName": "(Main page)"},
-            {"name": "1.html", "displayName": "First blog"}
+            {"name": "1.html", "displayName": "First blog"},
+            {"name": "index.html", "displayName": "Browse more thru the main page!"}
         ], "displayName": "Blogs?"},
 
         {"name": "projects/", "contents": [
