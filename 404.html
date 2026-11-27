@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="icon" href="/favicon.ico">
+    <meta charset="UTF-8">
+    <title>Maurice's BS</title>
+    <link rel="stylesheet" href="/template.css">
+</head>
 <body>
-    404 not found
+<div id="sharedLayout"> </div>
+<template id="pageTemplate">
+    <h1 style="text-align: center;"> 404 Not found! </h1> 
+    <img src="/imgs/gallery/traffic_cone.png" style="width: auto; height:25%;"> 
+    <span style="display: flex; align-items:center; font-size:1.25em;">Click here to go home: &nbsp; <a href="/"><img src="/imgs/badges/bs.gif"></a></span>
+</template>
 <script>
     var path = window.location.pathname; 
     if(path !== path.toLowerCase()){
         window.location.replace(path.toLowerCase()+window.location.search+window.location.hash);
     }
 </script>
+<style>
+    .pageContent{
+        display: flex;
+        flex-direction: column;
+        align-items:center;   
+    }
+</style>
+<script type="module" src = "/template.js"> </script>
 </body>
 </html>

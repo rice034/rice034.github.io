@@ -2,7 +2,7 @@ import * as utils from "/utils.js";
 var root = getComputedStyle(document.documentElement);
 
 // consts
-var TILING_COUNT = 5;
+var TILING_COUNT = 8;
 var POSTERS_COUNT = 2;
 var THEMES = ["original", "green", "autumn", "winter"];
 

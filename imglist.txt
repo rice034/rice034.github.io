@@ -7,6 +7,7 @@
 /imgs/gallery/burgersim/bread.png
 /imgs/gallery/burgersim/brioche.png
 /imgs/gallery/burgersim/plate.png
+/imgs/gallery/burgersim/potatobun.png
 /imgs/badges/github.png
 /imgs/posters/poster1.gif
 /imgs/posters/poster2.gif

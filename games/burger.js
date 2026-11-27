@@ -6,16 +6,26 @@ var root = getComputedStyle(document.documentElement);
 
 var g;
 var bi;
-var imgsToLoad = ["/imgs/gallery/burgersim/plate.png"];
+var imgsToLoad = [];
+var itms = [];
 window.page_init = function(){
+    utils.xhr_fetch("./imglist.txt", function(err, txt){
+        if(err){return;}
+        var list = txt.split(/\r?\n/).filter(function(line){return line.trim()!==""});
+        for(let src of list){
+            if(src.split("/").contains("burgersim")){
+                utils.loadImg(src);
+            }
+        }
+        for(var i=0; i<imgsToLoad.length; i++){
+            utils.loadImg(imgsToLoad[i]);
+        }
+    });
     document.querySelectorAll("#pantry li").forEach(function(item){
         item.addEventListener("click", function(){
             getFromPantry(item.textContent);
         });
     });
-    for(var i=0; i<imgsToLoad.length; i++){
-        utils.loadImg(imgsToLoad[i]);
-    }
     bi = document.getElementById("mainCanvas");
     g = utils.imgGetGraphics(bi);
     setInterval(tick, 100);
@@ -59,6 +69,11 @@ window.page_resize = function(){
 window.clickHandler = function(str){
     str=str.toLowerCase();
     console.log("'"+str+"' clicked");
+    switch(str){
+        case "brioche": case "potato bun": case "sourdough bread":
+        case "white bread slice": case "pretzel bun": case "pineapple bun":
+            break;
+    }
 }
 window.canvasHandler = function(type,x,y){
     console.log("mouse "+type+" ("+x+","+y+")");
